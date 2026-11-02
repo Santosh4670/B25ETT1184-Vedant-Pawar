@@ -1,0 +1,68 @@
+
+#include <iostream>
+using namespace std;
+
+// Base class
+class FoodItem {
+public:
+    virtual void calculateBill() {
+        cout << "Calculating food bill..." << endl;
+    }
+};
+
+// Derived class 1
+class Pizza : public FoodItem {
+    int quantity;
+    float price;
+
+public:
+    Pizza(int q, float p) {
+        quantity = q;
+        price = p;
+    }
+
+    void calculateBill() override {
+        cout << "\nPizza Bill" << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Price: Rs. " << price << endl;
+        cout << "Total Bill: Rs. "
+             << quantity * price << endl;
+    }
+};
+
+// Derived class 2
+class Burger : public FoodItem {
+    int quantity;
+    float price;
+
+public:
+    Burger(int q, float p) {
+        quantity = q;
+        price = p;
+    }
+
+    void calculateBill() override {
+        cout << "\nBurger Bill" << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Price: Rs. " << price << endl;
+        cout << "Total Bill: Rs. "
+             << quantity * price << endl;
+    }
+};
+
+int main() {
+    Pizza p(2, 150);
+    Burger b(3, 80);
+
+    FoodItem *ptr;
+
+    // Calling Pizza function
+    ptr = &p;
+    ptr->calculateBill();
+
+    // Calling Burger function
+    ptr = &b;
+    ptr->calculateBill();
+
+    return 0;
+}
