@@ -1,0 +1,87 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class 1: Employee basic information
+class Employee {
+protected:
+    int empId;
+    string empName;
+    int age;
+
+public:
+    void getEmployeeDetails() {
+        cout << "Enter Employee ID: ";
+        cin >> empId;
+
+        cout << "Enter Employee Name: ";
+        cin.ignore();
+        getline(cin, empName);
+
+        cout << "Enter Age: ";
+        cin >> age;
+    }
+};
+
+// Base class 2: Department information
+class Department {
+protected:
+    string deptName;
+    string designation;
+    string joiningDate;
+
+public:
+    void getDepartmentDetails() {
+        cout << "Enter Department Name: ";
+        getline(cin >> ws, deptName);
+
+        cout << "Enter Designation: ";
+        getline(cin, designation);
+
+        cout << "Enter Joining Date (DD-MM-YYYY): ";
+        getline(cin, joiningDate);
+    }
+};
+
+// Derived class using multiple inheritance
+class EmployeeProfile : public Employee, public Department {
+public:
+    void getDetails() {
+        getEmployeeDetails();
+        getDepartmentDetails();
+    }
+
+    void displayDetails() {
+        cout << "\n----- Employee Profile -----" << endl;
+        cout << "Employee ID: " << empId << endl;
+        cout << "Employee Name: " << empName << endl;
+        cout << "Age: " << age << endl;
+        cout << "Department: " << deptName << endl;
+        cout << "Designation: " << designation << endl;
+        cout << "Joining Date: " << joiningDate << endl;
+    }
+};
+
+int main() {
+    int n;
+
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    EmployeeProfile emp[50];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details of Employee "
+             << i + 1 << endl;
+        emp[i].getDetails();
+    }
+
+    cout << "\n========== DEPARTMENT-WISE EMPLOYEE PROFILES ==========";
+
+    for (int i = 0; i < n; i++) {
+        emp[i].displayDetails();
+    }
+
+    return 0;
+}
